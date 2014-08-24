@@ -1,0 +1,4 @@
+#!/bin/bash
+sed -i "s/%%replace%%/$PHP_1_PORT_9000_TCP_ADDR/" /usr/local/nginx/conf/nginx.conf
+env
+sbin/nginx
