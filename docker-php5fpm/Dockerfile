@@ -15,9 +15,10 @@ RUN \
 
 ## Create locale
 RUN \
-  apt-get -y install language-pack-en && \
-  dpkg-reconfigure locales && \
-  locale-gen en_US.UTF-8
+  apt-get -y install locales && \
+#  dpkg-reconfigure locales && \
+  echo "en_US.UTF-8 UTF-8\nen_US ISO-8859-1" >> /etc/locale.gen && \
+  locale-gen
 
 ## Set environment variables
 ENV LANG en_US.UTF-8
