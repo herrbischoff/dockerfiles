@@ -1,0 +1,44 @@
+#
+# php5-fpm
+#
+
+FROM       debian:wheezy
+MAINTAINER bubblun <https://github.com/bubblun>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+## Make sure system is up-to-date
+RUN \
+  apt-get update && \
+  apt-get -y upgrade && \
+  apt-get -y dist-upgrade
+
+## Create locale
+RUN \
+  apt-get -y install language-pack-en && \
+  dpkg-reconfigure locales && \
+  locale-gen en_US.UTF-8
+
+## Set environment variables
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV HOME /root
+
+## Install and setup
+RUN apt-get -y -f install php5-fpm php5-cli php5-mysql php5-mcrypt php5-curl curl
+RUN rm /etc/php5/fpm/pool.d/www.conf
+ADD www.conf /etc/php5/fpm/pool.d/www.conf
+RUN mkdir /var/www
+
+## Expose ports
+EXPOSE 9000
+
+## Set working directory
+WORKDIR /var/www
+
+## Setup
+ADD run /tmp/run
+
+## Run
+CMD /tmp/run
