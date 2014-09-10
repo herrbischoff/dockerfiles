@@ -27,7 +27,7 @@ ENV LC_ALL en_US.UTF-8
 ENV HOME /root
 
 ## Install and setup
-RUN apt-get -y -f install php5-fpm php5-cli php5-mysql php5-mcrypt php5-curl curl
+RUN apt-get -y -f install php5-fpm php5-cli php5-mysql php5-mcrypt php5-curl curl php5-gd php5-intl php-pear php5-imagick php5-imap php5-mcrypt php5-memcache php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl snmp
 RUN rm /etc/php5/fpm/pool.d/www.conf
 ADD www.conf /etc/php5/fpm/pool.d/www.conf
 RUN mkdir /var/www
